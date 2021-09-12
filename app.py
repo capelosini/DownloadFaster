@@ -3,51 +3,28 @@ import time
 import threading
 import datetime
 
-def Anim(animation, delay):
-    global anim
-    while anim:
-        for frame in animation:
-            if anim == True:
-                print(frame, end="\r")
-                time.sleep(delay)
-            else:
-                exit()
-
-
-anim=False
-
 url=input("URL: ")
 
 name=url.split("/")[-1]
 
-print(" ")
-
-anim=True
-threading._start_new_thread(Anim, (["Getting data -", "Getting data |", "Getting data /", "Getting data -", "Getting data |", "Getting data /"], 0.3))
+print("\nGetting Data")
 
 started=datetime.datetime.now()
 
-r=requests.get(url)
-
-anim=False
+r=requests.get(url, stream=True)
 
 r.encoding = "ISO-8859-1"
 
 print("\nReady!\n")
 
-time.sleep(0.3)
-
-anim=True
-threading._start_new_thread(Anim, (["Exporting data into a file -", "Exporting data into a file --", "Exporting data into a file ---", "Exporting data into a file ----->", ], 0.2))
+print("\nExporting data into a file ----->\n")
 
 file=open(name, "wb")
 file.write(r.content)
 
 end=datetime.datetime.now()
 
-anim=False
-
-print("Exporting data into a file ---->\nDone!")
+print("Done!")
 
 hour=end.hour - started.hour
 if started.minute > end.minute:
