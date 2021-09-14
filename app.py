@@ -3,9 +3,16 @@ import time
 import threading
 import datetime
 
+exts=["zip", "rar", "mp4", "mp3", "png", "mkv", "txt", "doc", "pdf", "ppt", "jpeg", "eps", "psd", "cdr", "ai", "jpg"]
+
 url=input("URL: ")
 
 name=url.split("/")[-1]
+
+ext=name.split(".")[-1]
+
+if ext not in exts:
+    name=input("\nName and Extension of file: ")
 
 print("\nGetting Data")
 
